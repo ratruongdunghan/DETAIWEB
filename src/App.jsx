@@ -1,38 +1,29 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { useState } from 'react'
+import './App.css'
+import DashBoard from './pages/DashBoard'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Projects from './pages/Projects';
+import Teams from './pages/Teams';
+import Analytics from './pages/Analytics';
+import Messages from './pages/Messages';
+import Integrations from './pages/Integrations';
 
-
-import './App.css';
-import Cart from './components/Cart';
-import ProductList from './components/ProductList';
 
 function App() {
-  const [cart, setCart] = useState([]);
-
-  // const addToCart = (product) => {
-  //   setCart([...cart, product]);
-  // };
-  const addToCart = (product) => {
-    setCart([...cart, product]);
-  }
-
-
-  // const removeFromCart = (product) => {
-  //   setCart(cart.filter((item) => item !== product));
-  // };
-
 
   return (
     <Router>
-      <nav>
-        <Link to="/">Trang sản phẩm</Link> | <Link to="/Cart">Giỏ hàng ({cart.length})</Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<ProductList addToCart={addToCart} />} />
-        <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} />} />
-      </Routes>
-    </Router>
-  );
+    <Routes>
+    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/dashboard" element={<DashBoard />} />
+      <Route path="/projects" element={<Projects />} />
+      <Route path="/teams" element={<Teams />} />
+      <Route path="/analytics" element={<Analytics />} />
+      <Route path="/messages" element={<Messages />} />
+      <Route path="/integrations" element={<Integrations />} />
+    </Routes>
+  </Router>
+  )
 }
 
-export default App;
+export default App
